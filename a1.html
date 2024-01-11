@@ -4,15 +4,66 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
 
-    <title>Example Student's HCDE 439 Physical Computing Page!</title>
+    <title>Ujjval Chopra's HCDE 439 Physical Computing Page!</title>
 
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Example Student's Assignment 1!</h1>
-    <div class="header">
-      <img src="red-panda.jpg" />
-      <p>Here is all the documentation for assignment 1!</p>
-    </div>
+    <h1> Ujjval's Assignment 1!</h1>
+    <!-- Schematic Image -->
+    <img src="Schematic-image.jpg" alt="Schematic Image" />
+    <p>Here is the schematic for my circuit. I chose 330 ohm values for resistors because I worked with 2 red and 1 green LED
+      In this we needed a 20 mA current and the voltage drop accross each was 1.8V. Using Ohm's law, I found out that the resistor
+      value should be 350 ohm. 330 ohm was the nearest one
+    </p>
+    
+    <!-- Circuit Image -->
+    <img src="circuit-image.jpg" alt="Circuit Image" />
+    <p>This is my actual circuit on the breadboard. I used LEDs red,green,and red.</p>
+ 
+    <pre><code class="language-arduino">
+      // the setup function runs once when you press reset or power the board
+      void setup() {
+        // put your setup code here, to run once:
+        pinMode(13, OUTPUT); // initialize first red pin as an output.
+        pinMode(12,OUTPUT); // initialize first second green pin as an output.
+        pinMode(8,OUTPUT); /// initialize third red pin as an output.
+      
+      }
+    
+    
+      // the loop function runs over and over again forever
+      void loop() {
+        digitalWrite(13, HIGH);  // turn the LED on (HIGH is the voltage level)
+        delay(1000);                      // wait for a second
+        digitalWrite(13, LOW);   // turn the LED off by making the voltage LOW
+        delay(1000);                      // wait for a second
+        digitalWrite(12, HIGH);  // turn the LED on (HIGH is the voltage level)
+        delay(1000);                      // wait for a second
+        digitalWrite(12, LOW);   // turn the LED off by making the voltage LOW
+        delay(1000);                     // wait for a second
+        digitalWrite(8, HIGH);  // turn the LED on (HIGH is the voltage level)
+        delay(1000);                      // wait for a second
+        digitalWrite(8, LOW);   // turn the LED off by making the voltage LOW
+        delay(1000);                      // wait for a second
+      }      
+    </code></pre>
+
+    <!-- Operation Gif -->
+    <img src="operation.GIF" alt="Operation Gif" />
+    <p>Here is an animated gif showing the operation of my circuit.</p>
+
+    <!-- Answers to Questions -->
+    <p>Answers to additional questions:</p>
+    <ol>
+      <li>Draw a graph where the X axis is time and the Y axis is voltage across the LEDs</li>
+      <img src="answer1.jpg" alt="Graph" />
+      <li>How many LEDs could you blink independently with your Arduino? How much current would that draw?...</li>
+     <p> We have 14 pins in the breadboard, hence we can have 14 LEDs blink individually. That would draw 20 mA * 14 = 0.28A</p>
+      <li>How fast do you need to blink your LEDs until you no longer can tell that they are blinking?...</li>
+      <p> We can change the delay to 60 and at that point even if the LED blinks, we will not be able to see it.</p>
+    </ol>
+   
+    
   </body>
 </html>
