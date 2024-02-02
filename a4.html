@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+    <title>Ujjval Chopra's HCDE 439 Physical Computing Page!</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Ujjval's's Assignment 4!</h1>
+    <!-- Schematic Image -->
+    <img src="HCDE 439-16.jpg" alt="Schematic Image" />
+    <p>Here is the schematic for my circuit. I chose 1M ohm resistor for capacitive sensinh since, we require current to flow from
+       pin 2 at very small rate. Pin 4 will allow to take ghe number of outputs required. Using the ouputs from capacitive sensing, we can
+       enter the value for our servo motor which is connected to a 5V power supply, ground, and ardruino pin 9.
+    </p>
+    
+    <!-- Circuit Image -->
+    <img src="Circuit-4.jpg" alt="Circuit Image" />
+    <p>This is my actual circuit on the breadboard. I used a 1M ohm resistor, a servo motor, and wired connections from my ardruino board.</p>
+ 
+    <pre><code class="language-arduino">
+        //Including both capacitive sensor and servo libraries
+        #include <CapacitiveSensor.h>
+        #include <Servo.h>
+            
+        Servo myServo;
+        CapacitiveSensor   cs_4_2 = CapacitiveSensor(4,2);    	// 1 megohm resistor between pins 4 & 2, pin 2 is sensor pin, add wire, metal thing
+            
+        void setup(){
+            myServo.attach(9); // attaches the servo on pin 9 to the servo object
+            cs_4_2.set_CS_AutocaL_Millis(0xFFFFFFFF); 	// turn off autocalibrate on channel 1 - just as an example
+            Serial.begin(9600);
+        }
+            
+        void loop()               	 
+        {
+            long start = millis();
+            long total1 =  cs_4_2.capacitiveSensor(30);
+            
+            Serial.print(millis() - start);    	// check on performance in milliseconds
+            Serial.print("\t");                	// tab character for debug window spacing
+            
+            Serial.println(total1);            	// print sensor output 1
+            delay(10);                         	// arbitrary delay to limit data to serial port
+            
+            int val = map(total1, 0, 1023, 0, 180); // maps the read value from capacitor sensing to 0-180 for the servo
+            
+            myServo.write(val); 
+            delay(200); // wait for the servo to get there
+        }
+            
+    </code></pre>
+
+    <!-- Operation Gif -->
+    <img src="operation-4.GIF" alt="Operation Gif" />
+    <p>Here is an animated gif showing the operation of my circuit.</p>
+    
+    <!-- Answers to Questions -->
+    <p>Answers to additional questions:</p>
+      <img src="HCDE 439-17.jpg" alt="Answer-1" />
+      <h2>Pseudocode for Answer 2</h2>
+    <pre><code class="language-pseudocode">
+        //Create a variable x
+        If random(100) == 20 // chances of this are 1/100 which is 1%
+        x is an errenous reading
+        Else x = analogRead(inputPin)
+    </code></pre>
+
+    <h2>Pseudocode for Answer 3</h2>
+    <pre><code class="language-pseudocode">
+        //Create a variable x and take the reading
+        x = analogRead(inputPin)
+        //Now create another variable err_noise as
+        err_noise = random (-0.1*x, 0.1*x) // this generates any random value which is +10% or -10% of our error
+        now add this error margin to our original reading x
+        x+= err_noise
+    </code></pre>
+      
+  </body>
+</html>
