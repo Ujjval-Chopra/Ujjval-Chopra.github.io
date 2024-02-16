@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+    <title>Ujjval Chopra's HCDE 439 Physical Computing Page!</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Ujjval's's Assignment 5!</h1>
+
+    <!-- Schematic Image -->
+    <img src="Schematic-5.jpg" alt="Schematic Image" />
+    <p>Here is the schematic for my circuit. I chose 1M ohm resistor for capacitive sensing fpr capacitive sensing since, we require current to flow from
+       pin 2 at very small rate. Pin 4 will allow to take ghe number of outputs required. Using the ouputs from capacitive sensing, we can read the current and flow
+       it into pin 5. The pin 5 will control the brightnes sof the LED based on its sensing.
+    </p>
+    
+    <!-- Circuit Image -->
+    <img src="circuit - 5.jpg" alt="Circuit Image" />
+    <p>This is my actual circuit on the breadboard. I used a 1M ohm resistor for capacitive sensing through alligator clips. I also used alligator clips
+        and an external power supply through my PWM pins.
+    </p>
+ 
+    <pre><code class="language-arduino">
+        #include <CapacitiveSensor.h>
+
+        CapacitiveSensor   cs_4_2 = CapacitiveSensor(4,2); // initializing capacitive sensing
+        int ardPin = 5; // PWM pin connected to the MOSFET gate
+            
+            
+        void setup(){
+            pinMode (ardPin, OUTPUT);
+            cs_4_2.set_CS_AutocaL_Millis(0xFFFFFFFF);
+            Serial.begin(9600); 
+        }
+            
+        void loop() {
+            long sensorValue = cs_4_2.capacitiveSensor(30); // getting the capacitive sensor reading
+            int outputValue = map(sensorValue, 0, 1000, 0, 255); // Map sensor value to PWM range (0-255)
+            analogWrite(ardPin, outputValue); // Control load power with PWM
+            delay(100);
+            
+            Serial.print("Capacitive Sensor Value: "); // printing to serial monitor
+            Serial.println(sensorValue);
+        }
+            
+    </code></pre>
+
+    <!-- Operation Gif -->
+    <img src= "a5.GIF" alt="Operation Gif" />
+    <p>Here is an animated gif showing the operation of my circuit.</p>
+    
+    <!-- Answers to Questions -->
+    <p>Answers to additional questions:</p>
+       <h2>Question 1</h2>
+     <p> As per the documentation, the maximum amount of current between pin 2 and pin 3 is 13.5 A. </p>
+
+     <h2>Answer 2</h2> 
+     <img src="sch_a5_p2.jpg" alt="Answer 2" />
+
+    <h2>Answer 3</h2>
+    <img src="schm_a5_q3.jpg" alt="Answer 3" />
+    <pre><code class="language-pseudocode">
+        #include motor libraries
+
+        void setup(){
+            inititalize the motor
+        }
+
+        void loop(){
+            set motor to forward motor.forward()
+            motor.forward()
+            delay(1000)
+
+            set motor to backward motor.backward()
+            motor.backward()
+            delay(1000)
+
+            set motor to forward motor.forward()
+            motor.backward()
+            delay(1000)
+
+            set motor to backward motor.backward()
+            motor.forward()
+            delay(10000)
+        }
+    </code></pre>
+      
+  </body>
+</html>
