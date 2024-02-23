@@ -95,7 +95,6 @@
         let x_data = Number(data[0]);
         let y_data = Number(data[1]);
         let switchState = Number(data[2]);
-        let brightness = map(x_data, 0, 1023, 0, 255); // Map X-axis value to LED brightness
 
         // Change text and colors based on LED state
         if (switchState == LOW) {
