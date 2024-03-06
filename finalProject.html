@@ -12,7 +12,7 @@
     <h1>Ujjval's Final Project: CoolBreeze!</h1>
 
      <!-- Project Concept -->
-     <h3> Project Concept</h3>
+     <h2> Project Concept</h2>
      <img src="Project Proposal.png" alt="Proposal for the project" />
      <p>Coming from living in 2 countries with sub-tropical climates, I wanted to build a temperature controlled fan that would switch off once the 
         temperature in the room went below a certain point. To achieve this, I utilized the following supplies:
@@ -24,22 +24,29 @@
         6)Breadboard
         7)limiting resistors (220 ohms)
         8)DC motor with fan
+        
+
     </p>
 
-    <h3> Technical Implemetation</h3>
+    <h2> Technical Implemetation</h2>
     <img src="HCDE 439-34.jpg" alt="Schematic Image" />
     <p> This is the schematic of my final project. My bigest challenge was getting my LCD display to work. Since I did not have an I2C module, I had to make
         make 12 connections with the breadboard and arduino uno. However, my connections did not work for a long time. I carefully read the LCD documentation, and 
         spent a lot of hours on these commmunities to realize that the A and K are the backlight pins of the LCD that enable the display. The K is the cathode that
         connects to 5V power supply but with a limiting resistir of 220 ohms and A is the anode that connects to the ground.
+
         The D0 to D3 pins require no connection as we are already getting the data that we need to display. For safety, we cound pin it to ground, but it is not required.
         The RS pin allows us to write to the LCD, where as the E pin allows us to control it. The RW pin is used to fetch content from the LCD but it is not required in our case, hence
         we ground it!
+
         The potentiometer is used to contrast the LCD with a 10k resistor built into it and the other 2 ends connect to ground. The DHT is the temperature and humidity sensor I used. It has
         3 pins. One is the data reading pin, one is power supply and the last one is the ground.
+
         For the DC motor that has the fan, we require the L239D controller.The L293D is used with DC motors because it allows them to go forward and backward. It protects the motors from 
         damage by handling the energy they produce when stopping. Also, it makes sure the motors get enough power, even if the control signals are weak. The L293D is easy to use with digital systems like microcontrollers, 
         making it a popular choice for driving DC motors, despite having some limitations like power loss.
+
+        
     </p>
     
     <!-- Circuit Image -->
@@ -85,7 +92,8 @@
       I used there suggestion as a troubleshooter and to my surprise it worked for my LCD. 
 
     </p>
- 
+
+    <p> Here is my firmware for the project. This was a relatively intuitive part of the project for me.</p>
     <pre><code class="language-arduino">
         #include <DHT.h>
         #include <LiquidCrystal.h>
@@ -140,7 +148,10 @@
     </code></pre>
 
     <!-- Operation Gif -->
-    <iframe width="560" height="315" src="https://youtube.com/shorts/MigdD-aLWy0?feature=shared" frameborder="0" allowfullscreen></iframe>
+
+    
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/MigdD-aLWy0" frameborder="0" allowfullscreen></iframe>
+
     <p>Here is the youtube video for the same.</p>
       
   </body>
